@@ -89,7 +89,7 @@ class ProdutoController extends Controller {
                 
                 $foto = Request::file('foto')[$key];
                 $fotoNome = md5(rand(11111, 99999)).'.JPG';
-                $destinationPath = 'C:\xampp\php\artes\public\img/';
+                $destinationPath = 'img/';
                 $foto->move($destinationPath, $fotoNome);
                 
                 $salvaFoto = new Imagem();
@@ -127,7 +127,7 @@ class ProdutoController extends Controller {
         $fotos = DB::select('select i.nome from imagems i where i.idProduto = ?', [$id]);
         
         foreach($fotos as $foto){
-            unlink('C:\xampp\php\artes\public\img/'.$foto->nome);
+            unlink('img/'.$foto->nome);
         }
         DB::table('imagems')->where('idProduto', '=', Request::input('id'))->delete();
       
@@ -170,7 +170,7 @@ class ProdutoController extends Controller {
     
     public function removeFoto(){
         
-        unlink('C:\xampp\php\artes\public\img/'.Request::input('nome'));
+        unlink('img/'.Request::input('nome'));
         DB::table('imagems')->where('id', '=', Request::input('id'))->delete();
         $idProduto = Request::input('idProduto');
         
@@ -188,7 +188,7 @@ class ProdutoController extends Controller {
                 
                 $foto = Request::file('foto')[$key];
                 $fotoNome = md5(rand(11111, 99999)).'.JPG';
-                $destinationPath = 'C:\xampp\php\artes\public\img/';
+                $destinationPath = 'img/';
                 $foto->move($destinationPath, $fotoNome);
                 
                 $salvaFoto = new Imagem();
