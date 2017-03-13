@@ -7,16 +7,32 @@ use artes\CategoriaProduto;
 use Request;
 
 class PublicoController extends Controller {
-
+    
+    
     public function __construct(){
 
     }
+    //lista destaques de produtos
+    public function listaDestaques(){
+        $categorias = DB::select('select c.id, c.categoria from categorias c order by c.categoria');
+        $produtos = Produto::all();
+        $resultado = array();
+        foreach ($produtos as $p){
+             $destaque = DB::select('select * from imagems i where i.idProduto = ? limit 1',[$p->id]);
+             $resultado = array_merge($resultado, $destaque);
+        }
+        //return $resultado;
+        return view('publico.destaques')->with(array('destaques'=>$resultado, 'categorias'=>$categorias));
+    }
+    
     //lista geral de produtos
     public function listaProduto(){
-
+        
+        $categorias = DB::select('select c.id, c.categoria from categorias c order by c.categoria');
+        
         $produtos = Produto::all();
 
-        return view('publico.destaques')->withProdutos($produtos);
+        return view('publico.listaProdutos')->with(array('produtos'=>$produtos, 'categorias'=>$categorias));
 
     }
     //produto especifico

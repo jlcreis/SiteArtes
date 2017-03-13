@@ -1,4 +1,4 @@
-@extends ('bem_vindo')
+@extends ('publico.bem_vindo')
 
 @section ('conteudo')
 

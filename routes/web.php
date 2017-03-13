@@ -28,7 +28,9 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 /*
  *Rotas públicas
  */
-Route::get('/', 'PublicoController@listaProduto');
+Route::get('/', 'PublicoController@listaDestaques');
+
+Route::get('/listaProdutos', 'PublicoController@listaProduto');
 
 Route::get('/quem_somos', 'PublicoController@quemSomos');
 
